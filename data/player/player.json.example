@@ -1,0 +1,61 @@
+{
+    "player_name": "Player1",
+    "hp": 100,
+    "mp": 50,
+    "inventory": {
+      "materials": [
+        "material1",
+        "material2",
+        "material1",
+        "material2"
+      ],
+      "equipment_stat":[
+        {
+          "weapon":{
+            "name": "The Throngler",
+            "description": "Beeg Sword",
+            "stat":{
+              "atk":0,
+              "res":0,
+              "crit_dmg":0.0,
+              "crit_rate":0.0,
+              "men":0,
+              "phys":0,
+              "thaum":0,
+              "pata":0
+            },
+            "abilities":[
+              "Slice n Dice", "Stronk Attack"
+            ]
+          }
+        },
+        {
+          "armor":{
+            "name": "Mark 7",
+            "description": "Pew Pew",
+            "stat":{
+              "atk":0,
+              "res":0,
+              "crit_dmg":0.0,
+              "crit_rate":0.0,
+              "men":0,
+              "phys":0,
+              "thaum":0,
+              "pata":0
+            },
+            "abilities":[
+              "Force Field", "Repulsion Canon"
+            ]
+          }
+        }
+
+      ]
+    },
+    "current_dungeon": "dungeon1",
+    "dungeon_progress": {
+      "dungeon1": {
+        "floor": 2,
+        "completed": false
+      }
+    }
+  }

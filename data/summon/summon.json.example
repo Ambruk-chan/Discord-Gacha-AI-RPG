@@ -1,0 +1,12 @@
+{
+    "id": "summon1",
+    "name": "Fire Spirit",
+    "description": "A small, floating orb of flame.",
+    "stats": {
+      "attack": 50,
+      "defense": 30,
+      "speed": 70
+    },
+    "abilities": ["fireball", "heat wave"],
+    "owner": "Player Name"
+  }

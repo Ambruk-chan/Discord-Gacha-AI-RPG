@@ -1,0 +1,57 @@
+{
+    "id": "dungeon1",
+    "name": "The Dark Forest",
+    "floors": [
+      {
+        "floor_number": 1,
+        "enemies": ["goblin", "wolf"],
+        "materials": ["wood", "herb"]
+      },
+      {
+        "floor_number": 2,
+        "enemies": ["orc", "troll"],
+        "materials": ["stone", "iron"]
+      }
+    ],
+    "enemies":[
+        {
+            "name":"Name",
+            "description":"is an enemy",
+            "stat":{
+                "hp":100,
+                "mp":50,
+                "atk":0,
+                "def":0,
+                "crit_dmg":0,
+                "crit_rate":0
+            },
+            "abilities":["ability1","ability2","ability3"]
+        },
+        {
+            "name":"Name",
+            "description":"is an enemy",
+            "stat":{
+                "hp":100,
+                "mp":50,
+                "atk":0,
+                "def":0,
+                "crit_dmg":0,
+                "crit_rate":0
+            },
+            "abilities":["ability1","ability2","ability3"]
+        },
+        {
+            "name":"Name",
+            "description":"is an enemy",
+            "stat":{
+                "hp":100,
+                "mp":50,
+                "atk":0,
+                "def":0,
+                "crit_dmg":0,
+                "crit_rate":0
+            },
+            "abilities":["ability1","ability2","ability3"]
+        }
+    ]
+  }

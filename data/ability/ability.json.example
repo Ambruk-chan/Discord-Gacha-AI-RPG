@@ -1,0 +1,11 @@
+{
+    "name": "name",
+    "description": "description",
+    "cost": "cost",
+    "dmg" : 0,
+    "heal": 0,
+    "atk_debuff": 0.0,
+    "def_debuff":0.0,
+    "atk_buff":0.0,
+    "def_buff":0.0
+}
