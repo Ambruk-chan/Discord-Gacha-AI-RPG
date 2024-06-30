@@ -81,3 +81,33 @@ class Summon:
     crit_dmg:int
     crit_rate:int
     abilities: list[Ability]
+
+
+# Okay, these are the stuff the AI will generate that isn't stored
+@dataclass
+class ResultText:
+    text: str
+
+@dataclass
+class Results:
+    results: list[ResultText]
+
+@dataclass
+class GenerationRequest:
+    max_context_length: int
+    max_length: int
+    prompt: str
+    quiet: bool
+    rep_pen: float
+    rep_pen_range: int
+    rep_pen_slope: float
+    temperature: float
+    tfs: float
+    top_a: float
+    top_k: int
+    top_p: float
+    typical: float
+
+class envelope:
+    text: str
+    thread: str #??
