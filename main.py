@@ -6,6 +6,10 @@ from discord import Intents
 from discord import Client
 import logging
 import argparse
+from bot.alchemy import alchemy_bot
+from bot.battle import battle_bot
+from bot.dungeon import dungeon_bot
+from bot.rpg import rpg_bot
 import config
 
 from discord import app_commands
@@ -31,22 +35,15 @@ async def on_ready():
     # Let owner known in the console that the bot is now running!
     print(f'Discord Bot is Loading...')
 
-    # Command to Edit Message (You Right Click On It)
-    hello_world = discord.app_commands.ContextMenu(
-    name='Hello World',
-    callback=hello_world,
-    type=discord.AppCommandType.message
-    )
-    
-    # Initialize the Commands
-    tree.add_command(hello_world)
+    battle_bot.setup_battle_commands(tree)
+    rpg_bot.setup_rpg_commands(tree)
+    dungeon_bot.setup_dungeon_commands(tree)
+    alchemy_bot.setup_alchemy_commands(tree)
 
     await tree.sync(guild=None)  
     print(f'Discord Bot is up and running.')
 
-@tree.command(name="hello_world", description="Say Hello World!")
-async def character_list(interaction: discord.Interaction):
-    await interaction.response.send_message("Hello World~", ephemeral=True)  # Send the response
+
 
 
 @client.event
