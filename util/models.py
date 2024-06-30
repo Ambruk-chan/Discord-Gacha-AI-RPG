@@ -107,7 +107,3 @@ class GenerationRequest:
     top_k: int
     top_p: float
     typical: float
-
-class envelope:
-    text: str
-    thread: str #??

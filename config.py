@@ -12,9 +12,6 @@ global tts_config, tts_model, gpt_cond_latent, speaker_embedding
 
 queue_to_process_everything = asyncio.Queue()
 
-florence = None
-florence_processor = None
-
 tts_config = None
 tts_model = None
 gpt_cond_latent = None
