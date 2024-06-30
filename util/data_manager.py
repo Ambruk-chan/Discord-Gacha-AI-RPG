@@ -64,7 +64,7 @@ async def write_summon_data(summon: Summon):
         json.dump(summon.__dict__, f)
 
 
-
+        
 
 def read_results_from_json(json_data: dict) -> Results:
     results = [ResultText(**result) for result in json_data['results']]

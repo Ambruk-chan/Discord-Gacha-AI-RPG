@@ -31,6 +31,7 @@ async def send_to_llm(prompt: GenerationRequest) -> Results:
                 if response.status == 200:
                     try:
                         json_response = await response.json()
+                        print("JSON response get")
                         return data_manager.read_llm_result(json_response)
                     except json.decoder.JSONDecodeError as e:
                         print(f"JSON decode error: {e}")
