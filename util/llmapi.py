@@ -17,16 +17,17 @@ import config
 from util import data_manager
 from util.models import *
 
-async def send_to_llm(prompt: GenerationRequest) -> Response|None:
+
+async def send_to_llm(prompt: GenerationRequest) -> Response | None:
     # Get the queue item that's next in the list
     timeout = ClientTimeout(total=600)
     connector = TCPConnector(limit_per_host=10)
     async with ClientSession(timeout=timeout, connector=connector) as session:
         try:
             async with session.post(
-                config.text_api["address"] + config.text_api["generation"],
-                headers=config.text_api["headers"],
-                json=prompt.__dict__
+                    config.text_api["address"] + config.text_api["generation"],
+                    headers=config.text_api["headers"],
+                    json=prompt.__dict__
             ) as response:
                 if response.status == 200:
                     try:
@@ -45,4 +46,3 @@ async def send_to_llm(prompt: GenerationRequest) -> Response|None:
             # Handle any other exceptions
             print(f"An error occurred: {e}")
             return None
-        
