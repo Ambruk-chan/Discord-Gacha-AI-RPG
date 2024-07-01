@@ -1,17 +1,8 @@
-import requests
 import json
-import os
-import discord
 
 from aiohttp import ClientSession
 from aiohttp import ClientTimeout
 from aiohttp import TCPConnector
-
-from aiohttp import ClientSession
-from aiohttp import ClientTimeout
-from aiohttp import TCPConnector
-
-from typing import Any
 
 import config
 from util import data_manager

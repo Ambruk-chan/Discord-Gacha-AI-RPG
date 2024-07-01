@@ -3,20 +3,35 @@ import os
 from util.models import *
 import json
 
+def read_character_data(player_name: str) -> Player:
+    file_path = f'./data/player/{player_name}.json'
+    full_path = os.path.abspath(file_path)
+    print(f"Reading from file: {full_path}")
 
-async def read_character_data(display_name: str) -> Player:
-    with open(f'{display_name}.json', 'r') as f:
-        data = json.load(f)
-        player = Player(**data)
-    return player
+    try:
+        with open(file_path, 'r') as f:
+            json_data = f.read()
+
+        # Use the from_json method provided by dataclasses_json
+        player = Player.from_json(json_data)
+        return player
+    except FileNotFoundError:
+        print(f"No data found for player: {player_name}")
+        return None
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON data for player: {player_name}")
+        return None
 
 
-async def write_character_data(player: Player):
-    file_path = f'../util/{player.name}.json'
+def write_character_data(player: Player):
+    file_path = f'./data/player/{player.name}.json'
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
+    full_path = os.path.abspath(file_path)
+    print(f"Full file path: {full_path}")
+
     with open(file_path, 'w') as f:
-        json.dump(player.__dict__, f)
+        f.write(player.to_json(indent=2))
 
 
 async def read_dungeon_data(dungeon_name: str) -> Dungeon:

@@ -1,34 +1,43 @@
 import discord
 import config
-from util import llmapi
 from util import data_manager
 from util import processors
 from util import discordapi
 from util.models import *
 
+
 async def generate_new_player():
     while True:
         content = await config.process_player_request.get()
         interaction: discord.Interaction = content["interaction_data"]
-        user:discord.Member = interaction.user
+        user: discord.Member = interaction.user
         about = content["description"]
         print(user.display_name)
         exist = await check_player_exist(user.display_name)
         player_name = user.display_name
         player_desc = about
         if exist:
-            await discordapi.send_webhook_message(interaction.channel,f"The Player {player_name} already exist,user",)
+            await discordapi.send_webhook_message(interaction.channel, f"The Player {player_name} already exist,user", )
             config.process_player_request.task_done()
         else:
             player_stat = await processors.process_attributes(about)
             print(player_stat)
-            player_data = Player(name = player_name,desc=player_desc,stat = player_stat)
-            
+            player_data = Player(name=player_name, desc=player_desc, stat=player_stat)
+
             await data_manager.write_character_data(player_data)
 
             generated_player = player_info_string(player_data)
-            await discordapi.send_webhook_message(interaction.channel,generated_player)
+            await discordapi.send_webhook_message(interaction.channel, generated_player)
             config.process_player_request.task_done()
+
+
+def getPlayerInfo(name: str) -> str:
+    player_data = data_manager.read_character_data(name)
+    if player_data.name != "":
+        return player_info_string(player_data)
+    else:
+        return f"Player {name} don't exist"
+
 
 def player_info_string(player: Player) -> str:
     def format_stat(stat: Stat) -> str:
@@ -64,20 +73,16 @@ def player_info_string(player: Player) -> str:
     info = f"""
 **{player.name}**
 {player.desc}
-
 **Stats:**
 {format_stat(player.stat)}
-
 **Equipment:**
 {format_equipment(player.weapon, "Weapon")}
-
 {format_equipment(player.armor, "Armor")}
-
 {format_equipment(player.possession, "Possession")}
-
 {format_equipment(player.power, "Power")}
 """
     return info.strip()
+
 
 async def check_player_exist(name):
     player_list = await data_manager.get_player_list()

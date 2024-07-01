@@ -1,6 +1,8 @@
-
-
 from dataclasses import dataclass, field
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
 @dataclass
 class Stat:
     hp: int = 0
@@ -14,12 +16,16 @@ class Stat:
     pata_rate: float = 0.0
     attributes: list = field(default_factory=list)
 
+
+@dataclass_json
 @dataclass
 class Equipment:
     name: str = ""
     desc: str = ""
     stat: Stat = field(default_factory=Stat)
 
+
+@dataclass_json
 @dataclass
 class Player:
     name: str = ""
@@ -31,6 +37,8 @@ class Player:
     possession: Equipment = field(default_factory=Equipment)
     power: Equipment = field(default_factory=Equipment)
 
+
+@dataclass_json
 @dataclass
 class Enemy:
     name: str
@@ -38,6 +46,8 @@ class Enemy:
     materials: list[str]
     stat: Stat
 
+
+@dataclass_json
 @dataclass
 class Encounter:
     name: str
@@ -46,20 +56,26 @@ class Encounter:
     steal: int
     material: list[str]
 
+
+@dataclass_json
 @dataclass
 class Dungeon:
-    name:str
-    floors:int
-    enemies:list[Enemy]
+    name: str
+    floors: int
+    enemies: list[Enemy]
     boss: Enemy
     encounter: list[Encounter]
 
-@dataclass  
+
+@dataclass_json
+@dataclass
 class Summon:
     name: str
     desc: str
     stat: Stat
 
+
+@dataclass_json
 @dataclass
 class Attribute:
     name: str
@@ -68,41 +84,49 @@ class Attribute:
     rare: int
     stat: str
 
+
+@dataclass_json
 @dataclass
 class AttributeType:
     name: str
     desc: str
 
+
+@dataclass_json
 @dataclass
 class AttributeModifier:
-    name:str
-    atk:int
-    res:int
+    name: str
+    atk: int
+    res: int
     hp: int
 
 
+@dataclass_json
 @dataclass
 class AttributeInfo:
-    attributes:list[Attribute]
-    types:list[AttributeType]
+    attributes: list[Attribute]
+    types: list[AttributeType]
     modifier: list[AttributeModifier]
 
 
-
-
 # Okay, these are the stuff the AI will generate that isn't stored
+@dataclass_json
 @dataclass
 class Result:
     text: str
     finish_reason: str
 
+
+@dataclass_json
 @dataclass
 class Response:
     results: list[Result] = field(default_factory=list)
 
+
+@dataclass_json
 @dataclass
 class GenerationRequest:
-    prompt= ""
+    prompt = ""
     stop_sequence = []
     add_bos_token = True
     ban_eos_token = True
@@ -122,7 +146,7 @@ class GenerationRequest:
     rep_pen_slope = 0.9
     use_default_badwordsids = True
     early_stopping = True
-    sampler_order= [
+    sampler_order = [
         6,
         0,
         1,

@@ -32,7 +32,7 @@ async def on_ready():
     await apiconfig.api_status_check(config.text_api["address"] + config.text_api["model"],
                                      headers=config.text_api["headers"])
 
-    await asyncio.create_task(rpg_engine.generate_new_player())
+    task = asyncio.create_task(rpg_engine.generate_new_player())
 
     battle_bot.setup_battle_commands(tree)
     rpg_bot.setup_rpg_commands(tree)
@@ -54,7 +54,3 @@ async def on_message(message):
 
 # Run the Bot
 client.run(discord_token)
-
-
-def hello_world():
-    return

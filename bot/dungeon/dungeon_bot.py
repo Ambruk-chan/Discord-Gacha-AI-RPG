@@ -6,8 +6,8 @@ def setup_dungeon_commands(tree: app_commands.CommandTree):
     
     @tree.command(name="dungeon_help", description="Show Battle Tutorial!")
     async def dungeon_help(interaction: discord.Interaction):
-        help = show_dungeon_help()
-        await interaction.response.send_message(help,ephemeral=True)
+        dungeon_help = show_dungeon_help()
+        await interaction.response.send_message(dungeon_help, ephemeral=True)
 
     @tree.command(name="dungeon_create", description="Create a New Dungeon!")
     async def dungeon_create(interaction: discord.Interaction):
