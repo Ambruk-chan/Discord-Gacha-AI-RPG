@@ -1,5 +1,7 @@
 
-from models import *
+from dataclasses import asdict
+import os
+from util.models import *
 import json
 
 
@@ -33,16 +35,6 @@ async def write_enemy_data(enemy: Enemy):
     with open(f'{enemy.name}.json', 'w') as f:
         json.dump(enemy.__dict__, f)
 
-async def read_ability_data(ability_name: str) -> Ability:
-    with open(f'{ability_name}.json', 'r') as f:
-        data = json.load(f)
-        ability = Ability(**data)
-    return ability
-
-async def write_ability_data(ability: Ability):
-    with open(f'{ability.name}.json', 'w') as f:
-        json.dump(ability.__dict__, f)
-
 async def read_encounter_data(encounter_name: str) -> Encounter:
     with open(f'{encounter_name}.json', 'r') as f:
         data = json.load(f)
@@ -64,7 +56,25 @@ async def write_summon_data(summon: Summon):
         json.dump(summon.__dict__, f)
 
 
-        
+async def read_attribute_data() -> AttributeInfo:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    json_path = os.path.join(current_dir, '..', 'data', 'global', 'attributes.json')
+    
+    # Read the JSON file
+    with open(json_path, 'r') as file:
+        data = json.load(file)
+    attributes = [Attribute(**attr) for attr in data['AttributeInfo']['attributes']]
+    types = [AttributeType(**type_) for type_ in data['AttributeInfo']['types']]
+    stats = [AttributeModifier(**stat_) for stat_ in data['AttributeInfo']['stat']]
+    return AttributeInfo(attributes=attributes, types=types, modifier=stats)
+
+async def write_attribute_data(attr_info: AttributeInfo) -> str:
+    return json.dumps({"AttributeInfo": asdict(attr_info)}, indent=2)
+
+
+async def get_player_list():
+    player_list = []
+    return player_list
 
 def read_results_from_json(json_data: dict) -> Results:
     results = [ResultText(**result) for result in json_data['results']]

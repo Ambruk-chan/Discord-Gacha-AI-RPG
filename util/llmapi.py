@@ -15,7 +15,7 @@ from typing import Any
 
 import config
 from util import data_manager
-from models import *
+from util.models import *
 
 async def send_to_llm(prompt: GenerationRequest) -> Results:
     # Get the queue item that's next in the list

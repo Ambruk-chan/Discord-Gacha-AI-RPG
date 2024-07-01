@@ -1,45 +1,87 @@
-from ...util.models import *
 import discord
-from .rpg_prompt import *
 import config
-from ...util import llmapi
-from ...util import data_manager
+from util import llmapi
+from util import data_manager
+from util import processors
+from util import discordapi
+from util.models import *
 
+async def generate_new_player():
+    while True:
+        content = await config.process_player_request.get()
+        interaction: discord.Interaction = content["interaction_data"]
+        user:discord.Member = interaction.user
+        about = content["description"]
+        print(user.display_name)
+        exist = await check_player_exist(user.display_name)
+        player_name = user.display_name
+        player_desc = about
+        if exist:
+            await discordapi.send_webhook_message(interaction.channel,f"The Player {player_name} already exist,user",)
+            config.process_player_request.task_done()
+        else:
+            player_stat = await processors.process_attributes(about)
+            print(player_stat)
+            player_data = Player(name = player_name,desc=player_desc,stat = player_stat)
+            
+            data_manager.write_character_data(player_data)
 
-async def generate_new_player(user:discord.Member, about:str):
-    config.process_player_request.put_nowait(True)
-    player_name = user.display_name
-    player_desc = about
-    player_stat = await process_attributes(about)
-    player_data = Player(name = player_name,desc=player_desc,stat = player_stat)
-    
-    data_manager.write_character_data(player_data)
+            generated_player = player_info_string(player_data)
+            await discordapi.send_webhook_message(interaction.channel,generated_player)
+            config.process_player_request.task_done()
 
-    generated_player:str = ""
+def player_info_string(player: Player) -> str:
+    def format_stat(stat: Stat) -> str:
+        stat_lines = []
+        if stat.hp > 0:
+            stat_lines.append(f"HP: {stat.hp}")
+        if stat.phys_atk > 0:
+            stat_lines.append(f"Physical Attack: {stat.phys_atk}")
+        if stat.phys_def > 0:
+            stat_lines.append(f"Physical Defense: {stat.phys_def}")
+        if stat.men_atk > 0:
+            stat_lines.append(f"Mental Attack: {stat.men_atk}")
+        if stat.men_def > 0:
+            stat_lines.append(f"Mental Defense: {stat.men_def}")
+        if stat.thaum_atk > 0:
+            stat_lines.append(f"Thaumaturgical Attack: {stat.thaum_atk}")
+        if stat.thaum_def > 0:
+            stat_lines.append(f"Thaumaturgical Defense: {stat.thaum_def}")
+        if stat.pata_dmg > 0:
+            stat_lines.append(f"Pataphysical Damage: {stat.pata_dmg}")
+        if stat.pata_rate > 0:
+            stat_lines.append(f"Pataphysical Rate: {stat.pata_rate:.2f}")
+        if stat.attributes:
+            stat_lines.append(f"Attributes: {', '.join(stat.attributes)}")
+        return "\n".join(stat_lines)
 
-    
-    return 
+    def format_equipment(equip: Equipment | None, equip_type: str) -> str:
+        if equip:
+            return f"{equip_type}: {equip.name}\n{equip.desc}\n{format_stat(equip.stat)}"
+        else:
+            return f"No {equip_type.lower()} equipped"
 
+    info = f"""
+**{player.name}**
+{player.desc}
 
-def calculate_stat(attributes):
-    stat = Stat()
-    stat.attributes = attributes
-    
+**Stats:**
+{format_stat(player.stat)}
 
-    return stat
+**Equipment:**
+{format_equipment(player.weapon, "Weapon")}
 
-def regex_llm_attribute(generated_attribute):
+{format_equipment(player.armor, "Armor")}
 
+{format_equipment(player.possession, "Possession")}
 
-    return 
+{format_equipment(player.power, "Power")}
+"""
+    return info.strip()
 
-async def process_attributes(desc:str):
-    stat:Stat = Stat()
-    atrb_prompt = attribute_from_description_prompt(desc)
-    generated_attribute = llmapi.send_to_llm(atrb_prompt)
-    attributes_list = regex_llm_attribute(generated_attribute)
-    stat = calculate_stat(attributes_list)
-    return stat
-    
-
-
+async def check_player_exist(name):
+    player_list = await data_manager.get_player_list()
+    for player in player_list:
+        if player == name:
+            return True
+    return False

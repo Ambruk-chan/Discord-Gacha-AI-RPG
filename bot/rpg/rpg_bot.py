@@ -1,6 +1,7 @@
+import asyncio
 import discord
 from discord import app_commands
-import rpg_engine
+import config
 
 def setup_rpg_commands(tree: app_commands.CommandTree):
 
@@ -30,24 +31,21 @@ class CharacterCreatorModal(discord.ui.Modal, title='Create Character'):
         super().__init__()
         
         self.add_item(discord.ui.TextInput(label="About Yourself", placeholder="Who Are You?"))
-        self.add_item(discord.ui.TextInput(label="Weapon Description", placeholder="Just put it in"))
-        self.add_item(discord.ui.TextInput(label="Armor Description", placeholder="Just put it in"))
-        self.add_item(discord.ui.TextInput(label="Possession Description", placeholder="Just put it in"))
-        self.add_item(discord.ui.TextInput(label="Power Description", placeholder="Just put it in"))
        
     async def on_submit(self, interaction: discord.Interaction):
-        user_data = interaction.message.author
         description = self.children[0].value
-        weapon = self.children[1].value
-        armor = self.children[2].value
-        possession = self.children[3].value
-        power = self.children[4].value
+        queue_item = {
+        "interaction_data" : interaction,
+        "description" : description
+        }
+        config.process_player_request.put_nowait(queue_item)
+        await interaction.response.send_message("Creating Character Please Wait~")
         
-        await rpg_engine.generate_new_player(user_data, description, weapon, armor, possession, power)
 
-        await interaction.response.send_message("Starting Your Journey...")
+        
 
-#Umu, I am so dead~
+# Umu, I am so dead~
+# Umu, I have to queue
 
 async def getEquipmentText():
     # Grab data from json

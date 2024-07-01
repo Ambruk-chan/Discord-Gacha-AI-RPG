@@ -1,20 +1,19 @@
 
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class Stat:
-    hp:int
-    mp:int
-    phys_atk:int
-    phys_def:int
-    men_atk:int
-    men_def:int
-    thaum_atk:int
-    thaum_def:int
-    pata_dmg:int
-    pata_rate:float
-    attributes: list[str]
+    hp:int = 0
+    phys_atk:int = 0
+    phys_def:int = 0
+    men_atk:int = 0
+    men_def:int = 0
+    thaum_atk:int = 0
+    thaum_def:int = 0
+    pata_dmg:int = 0
+    pata_rate:float = 0
+    attributes: list = field(default_factory=list)
 
 @dataclass
 class Equipment:
@@ -62,6 +61,35 @@ class Summon:
     desc: str
     stat: Stat
 
+@dataclass
+class Attribute:
+    name: str
+    desc: str
+    type: str
+    rare: int
+    stat: str
+
+@dataclass
+class AttributeType:
+    name: str
+    desc: str
+
+@dataclass
+class AttributeModifier:
+    name:str
+    atk:int
+    res:int
+    hp: int
+
+
+@dataclass
+class AttributeInfo:
+    attributes:list[Attribute]
+    types:list[AttributeType]
+    modifier: list[AttributeModifier]
+
+
+
 
 # Okay, these are the stuff the AI will generate that isn't stored
 @dataclass
@@ -74,18 +102,34 @@ class Results:
 
 @dataclass
 class GenerationRequest:
-    max_context_length: int
-    max_length: int
-    prompt: str
-    quiet: bool
-    rep_pen: float
-    rep_pen_range: int
-    rep_pen_slope: float
-    temperature: float
-    tfs: float
-    top_a: float
-    top_k: int
-    top_p: float
-    typical: float
-    grammar: str = None
+    prompt= ""
+    stop_sequence = []
+    add_bos_token = True
+    ban_eos_token = True
+    do_sample = False
+    max_length = 1024
+    max_tokens = 1024
+    max_context_length = 8192
+    genamt = 1095
+    temp = 1.20,
+    top_k = 0
+    top_p = 0.75
+    top_a = 0
+    typical = 1
+    tfs = 1.0
+    rep_pen = 1
+    rep_pen_range = 0
+    rep_pen_slope = 0.9
+    use_default_badwordsids = True
+    early_stopping = True
+    sampler_order= [
+        6,
+        0,
+        1,
+        3,
+        4,
+        2,
+        5
+    ],
+    grammar = None,
     grammar_string = None

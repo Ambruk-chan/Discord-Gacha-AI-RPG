@@ -1,0 +1,229 @@
+{
+    "AttributeInfo": {
+      "attributes": [
+        {
+            "name": "Newtonian",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 1,
+            "stat": "Hybrid" 
+        },
+        {
+            "name": "Quantum",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 2,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Relativity",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 3,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Combustion",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 1,
+            "stat": "Attack"
+        },
+        {
+            "name": "Electric",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 2,
+            "stat": "Attack"
+        },
+        {
+            "name": "Radioactive",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 3,
+            "stat": "Attack"
+        },
+        {
+            "name": "Machine",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 1,
+            "stat": "Defend"
+        },
+        {
+            "name": "Robotic",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 2,
+            "stat": "Defend"
+        },
+        {
+            "name": "Cybernetic",
+            "desc": "string",
+            "type": "Phys",
+            "rare": 3,
+            "stat": "Defend"
+        },
+        {
+            "name": "Magic",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 1,
+            "stat": "Attack"
+        },
+        {
+            "name": "Miracle",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 2,
+            "stat": "Attack"
+        },
+        {
+            "name": "Fate",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 3,
+            "stat": "Attack"
+        },
+        {
+            "name": "Elemental",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 1,
+            "stat": "Defend"
+        },
+        {
+            "name": "Nature",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 2,
+            "stat": "Defend"
+        },
+        {
+            "name": "Creation",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 3,
+            "stat": "Defend"
+        },
+        {
+            "name": "Spiritual",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 1,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Divine",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 2,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Eldritch",
+            "desc": "string",
+            "type": "Thaum",
+            "rare": 3,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Willpower",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 1,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Determination",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 2,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Absurdism",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 3,
+            "stat": "Hybrid"
+        },
+        {
+            "name": "Faith",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 1,
+            "stat": "Defend"
+        },
+        {
+            "name": "Stoicism",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 2,
+            "stat": "Defend"
+        },
+        {
+            "name": "Nihilism",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 3,
+            "stat": "Defend"
+        },
+        {
+            "name": "Motivation",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 1,
+            "stat": "Attack"
+        },
+        {
+            "name": "Passion",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 2,
+            "stat": "Attack"
+        },
+        {
+            "name": "Obsession",
+            "desc": "string",
+            "type": "Mental",
+            "rare": 3,
+            "stat": "Attack"
+        }
+      ],
+      "types": [
+        {
+            "name": "Phys",
+            "desc": "string"
+        },
+        {
+            "name": "Mental",
+            "desc": "string"
+        },
+        {
+            "name": "Thaum",
+            "desc": "string"
+        }
+      ],
+      "stat":[
+        {
+            "name": "Hybrid",
+            "atk": 30,
+            "res": 30,
+            "hp": 100
+        },
+        {
+            "name": "Attack",
+            "atk": 50,
+            "res": 10,
+            "hp": 50
+        },
+        {
+            "name": "Defend",
+            "atk": 10,
+            "res": 50,
+            "hp": 200
+        }
+      ]
+    }
+  }

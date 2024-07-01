@@ -10,6 +10,7 @@ from bot.alchemy import alchemy_bot
 from bot.battle import battle_bot
 from bot.dungeon import dungeon_bot
 from bot.rpg import rpg_bot
+from bot.rpg import rpg_engine
 import config
 
 from discord import app_commands
@@ -19,6 +20,7 @@ from transformers.dynamic_module_utils import get_imports
 from transformers import AutoProcessor, AutoModelForCausalLM 
 import warnings
 from huggingface_hub import file_download
+
 
 
 load_dotenv()
@@ -34,6 +36,8 @@ tree = app_commands.CommandTree(client)
 async def on_ready():
     # Let owner known in the console that the bot is now running!
     print(f'Discord Bot is Loading...')
+
+    asyncio.create_task(rpg_engine.generate_new_player())
 
     battle_bot.setup_battle_commands(tree)
     rpg_bot.setup_rpg_commands(tree)

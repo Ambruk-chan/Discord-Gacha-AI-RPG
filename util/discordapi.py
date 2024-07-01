@@ -1,7 +1,7 @@
 import discord
 
 
-async def send_webhook_message(channel: discord.abc.GuildChannel, content: str, avatar_url: str, username: str) -> None:
+async def send_webhook_message(channel: discord.abc.GuildChannel, content: str, avatar_url: str = "https://i.imgur.com/rpd75Pr.jpg", username: str = "RPG") -> None:
     # Check if the channel is a text channel or a thread
     if isinstance(channel, discord.TextChannel) or isinstance(channel, discord.Thread):
         webhook_list = await channel.webhooks()
