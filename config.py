@@ -10,7 +10,7 @@ global image_api
 global character_card
 global tts_config, tts_model, gpt_cond_latent, speaker_embedding
 
-queue_to_process_everything = asyncio.Queue()
+process_player_request = asyncio.Queue()
 
 tts_config = None
 tts_model = None

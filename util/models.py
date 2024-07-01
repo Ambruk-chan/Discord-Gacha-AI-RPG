@@ -3,54 +3,42 @@
 from dataclasses import dataclass
 
 @dataclass
-class Ability:
+class Stat:
+    hp:int
+    mp:int
+    phys_atk:int
+    phys_def:int
+    men_atk:int
+    men_def:int
+    thaum_atk:int
+    thaum_def:int
+    pata_dmg:int
+    pata_rate:float
+    attributes: list[str]
+
+@dataclass
+class Equipment:
     name: str
-    description: str
+    desc: str
+    stat: Stat
 
-    phys_dmg: int
-    men_dmg: int
-    thaum_dmg: int
-    pata_dmg: int
-
-    phys_heal: int
-    men_heal: int
-    thaum_heal: int
-    pata_heal: int
-    
-    phys_buff: int
-    men_buff: int
-    thaum_buff: int
-    pata_buff: int
-
-    cost: int
-    
 @dataclass
 class Player:
     name: str
-    hp: int
-    mp: int
+    desc: str
     materials: list[str]
-    phys:int
-    men:int
-    thaum:int
-    pata:int
-    crit_dmg:int
-    crit_rate:int
-    abilities: list[Ability]
+    stat: Stat
+    weapon: Equipment
+    armor: Equipment
+    possession: Equipment
+    power: Equipment
 
 @dataclass
 class Enemy:
     name: str
-    hp: int
-    mp: int
+    desc: str
     materials: list[str]
-    phys:int
-    men:int
-    thaum:int
-    pata:int
-    crit_dmg:int
-    crit_rate:int
-    abilities: list[Ability]
+    stat: Stat
 
 @dataclass
 class Encounter:
@@ -71,16 +59,8 @@ class Dungeon:
 @dataclass  
 class Summon:
     name: str
-    hp: int
-    mp: int
-    rarity: int
-    phys:int
-    men:int
-    thaum:int
-    pata:int
-    crit_dmg:int
-    crit_rate:int
-    abilities: list[Ability]
+    desc: str
+    stat: Stat
 
 
 # Okay, these are the stuff the AI will generate that isn't stored
@@ -107,3 +87,5 @@ class GenerationRequest:
     top_k: int
     top_p: float
     typical: float
+    grammar: str = None
+    grammar_string = None
