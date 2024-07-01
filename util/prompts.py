@@ -41,7 +41,7 @@ def create_attributes_grammar(attributeinfo: AttributeInfo,max_level:int=1) -> s
 
     grammar_list = format_string_list_for_gbnf(attribute_list)
 
-    grammar =   f"root ::= [\"attr\"] [\"attr\"] <END> \nattr ::= {grammar_list}"
+    grammar =   f"root ::= \"[\"attr\"] [\"attr\"] <END>\" \n \nattr ::= {grammar_list}"
     
     return grammar
 

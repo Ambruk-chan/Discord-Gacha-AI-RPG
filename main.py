@@ -20,7 +20,7 @@ from transformers.dynamic_module_utils import get_imports
 from transformers import AutoProcessor, AutoModelForCausalLM 
 import warnings
 from huggingface_hub import file_download
-
+import apiconfig
 
 
 load_dotenv()
@@ -34,8 +34,14 @@ tree = app_commands.CommandTree(client)
 
 @client.event
 async def on_ready():
+
+    
     # Let owner known in the console that the bot is now running!
     print(f'Discord Bot is Loading...')
+    
+    # Setup the Connection with API
+    config.text_api = await apiconfig.set_api("text-default.json")
+    await apiconfig.api_status_check(config.text_api["address"] + config.text_api["model"], headers=config.text_api["headers"])
 
     asyncio.create_task(rpg_engine.generate_new_player())
 

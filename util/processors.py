@@ -52,6 +52,7 @@ async def process_attributes(desc:str):
     atrb_prompt = await prompts.attribute_from_description_prompt(desc)
     print(atrb_prompt)
     generated_attribute = await llmapi.send_to_llm(atrb_prompt)
+    print(generated_attribute)
     attributes_list = regex_llm_attribute(generated_attribute.results[0])
     print(attributes_list)
     stat = calculate_stat(attributes_list)
