@@ -24,7 +24,7 @@ async def generate_new_player():
             print(player_stat)
             player_data = Player(name = player_name,desc=player_desc,stat = player_stat)
             
-            data_manager.write_character_data(player_data)
+            await data_manager.write_character_data(player_data)
 
             generated_player = player_info_string(player_data)
             await discordapi.send_webhook_message(interaction.channel,generated_player)

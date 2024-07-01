@@ -7,8 +7,8 @@ from util import data_manager
 
 
 
-def calculate_stat(input_attributes: list[str]) -> Stat:
-    attribute_info = data_manager.read_attribute_data()
+async def calculate_stat(input_attributes: list[str]) -> Stat:
+    attribute_info = await data_manager.read_attribute_data()
     result_stat = Stat(attributes=input_attributes)
 
     for attr_name in input_attributes:
@@ -53,9 +53,9 @@ async def process_attributes(desc:str):
     print(atrb_prompt)
     generated_attribute = await llmapi.send_to_llm(atrb_prompt)
     print(generated_attribute)
-    attributes_list = regex_llm_attribute(generated_attribute.results[0])
+    attributes_list = regex_llm_attribute(generated_attribute.results[0].text)
     print(attributes_list)
-    stat = calculate_stat(attributes_list)
+    stat = await calculate_stat(attributes_list)
     print(stat)
     
     return stat

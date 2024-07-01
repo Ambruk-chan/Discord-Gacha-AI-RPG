@@ -1,36 +1,35 @@
 
 
 from dataclasses import dataclass, field
-
 @dataclass
 class Stat:
-    hp:int = 0
-    phys_atk:int = 0
-    phys_def:int = 0
-    men_atk:int = 0
-    men_def:int = 0
-    thaum_atk:int = 0
-    thaum_def:int = 0
-    pata_dmg:int = 0
-    pata_rate:float = 0
+    hp: int = 0
+    phys_atk: int = 0
+    phys_def: int = 0
+    men_atk: int = 0
+    men_def: int = 0
+    thaum_atk: int = 0
+    thaum_def: int = 0
+    pata_dmg: int = 0
+    pata_rate: float = 0.0
     attributes: list = field(default_factory=list)
 
 @dataclass
 class Equipment:
-    name: str
-    desc: str
-    stat: Stat
+    name: str = ""
+    desc: str = ""
+    stat: Stat = field(default_factory=Stat)
 
 @dataclass
 class Player:
-    name: str
-    desc: str
-    materials: list[str]
-    stat: Stat
-    weapon: Equipment
-    armor: Equipment
-    possession: Equipment
-    power: Equipment
+    name: str = ""
+    desc: str = ""
+    materials: list[str] = field(default_factory=list)
+    stat: Stat = field(default_factory=Stat)
+    weapon: Equipment = field(default_factory=Equipment)
+    armor: Equipment = field(default_factory=Equipment)
+    possession: Equipment = field(default_factory=Equipment)
+    power: Equipment = field(default_factory=Equipment)
 
 @dataclass
 class Enemy:
@@ -93,12 +92,13 @@ class AttributeInfo:
 
 # Okay, these are the stuff the AI will generate that isn't stored
 @dataclass
-class ResultText:
+class Result:
     text: str
+    finish_reason: str
 
 @dataclass
-class Results:
-    results: list[ResultText]
+class Response:
+    results: list[Result] = field(default_factory=list)
 
 @dataclass
 class GenerationRequest:

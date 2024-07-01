@@ -9,7 +9,7 @@ async def attribute_from_description_prompt(item_desc:str):
     attribute_info = format_attribute_info(attributes)
     grammar = create_attributes_grammar(attributes)
     instruction = "Based on the description above, please give 2 fitting attributes for the item/object/person/creature."
-    prompt = "USER: "+ attribute_info +"\n" + item_desc + instruction + "\n\n" + "ASSISTANT: "
+    prompt = "USER: "+ attribute_info +"\n" + item_desc +"\n\n" +instruction + "\n\n" + "ASSISTANT: "
     request.prompt = prompt
     request.stop_sequence = ["<END>"]
     request.grammar = grammar

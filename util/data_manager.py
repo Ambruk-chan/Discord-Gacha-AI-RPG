@@ -12,7 +12,7 @@ async def read_character_data(display_name: str) -> Player:
     return player
 
 async def write_character_data(player: Player):
-    with open(f'{player.name}.json', 'w') as f:
+    with open(f'../util/{player.name}.json', 'w') as f:
         json.dump(player.__dict__, f)
 
 async def read_dungeon_data(dungeon_name: str) -> Dungeon:
@@ -76,6 +76,12 @@ async def get_player_list():
     player_list = []
     return player_list
 
-def read_results_from_json(json_data: dict) -> Results:
-    results = [ResultText(**result) for result in json_data['results']]
-    return Results(results=results)
+def read_results_from_json(json_data) -> Response:
+    response = Response()
+    for result in json_data['results']:
+        response.results.append(Result(
+            text=result['text'],
+            finish_reason=result['finish_reason']
+        ))
+    
+    return response
