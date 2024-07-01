@@ -12,7 +12,10 @@ async def read_character_data(display_name: str) -> Player:
     return player
 
 async def write_character_data(player: Player):
-    with open(f'../util/{player.name}.json', 'w') as f:
+    file_path = f'../util/{player.name}.json'
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    
+    with open(file_path, 'w') as f:
         json.dump(player.__dict__, f)
 
 async def read_dungeon_data(dungeon_name: str) -> Dungeon:

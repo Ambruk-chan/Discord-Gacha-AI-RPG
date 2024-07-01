@@ -56,7 +56,7 @@ def player_info_string(player: Player) -> str:
         return "\n".join(stat_lines)
 
     def format_equipment(equip: Equipment | None, equip_type: str) -> str:
-        if equip:
+        if equip.name != "":
             return f"{equip_type}: {equip.name}\n{equip.desc}\n{format_stat(equip.stat)}"
         else:
             return f"No {equip_type.lower()} equipped"
