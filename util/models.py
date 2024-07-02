@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from typing import Union
+
+import discord
 from dataclasses_json import dataclass_json
 
 
@@ -40,31 +43,38 @@ class Player:
 
 @dataclass_json
 @dataclass
+class Choice:
+    desc: str = ""
+    materials: list[str] = field(default_factory=list)
+    type: str = ""
+    action: str = ""
+
+
+@dataclass_json
+@dataclass
 class Enemy:
-    name: str
-    desc: str
-    materials: list[str]
-    stat: Stat
+    name: str = ""
+    desc: str = ""
+    materials: list[str] = field(default_factory=list)
+    stat: Stat = field(default_factory=Stat)
 
 
 @dataclass_json
 @dataclass
 class Encounter:
-    name: str
     description: str
-    dmg: int
-    steal: int
-    material: list[str]
+    choices: list[Choice] = field(default_factory=list)
 
+@dataclass_json
+@dataclass
+class Event:
+    event : Union[Encounter,Enemy]
 
 @dataclass_json
 @dataclass
 class Dungeon:
     name: str
-    floors: int
-    enemies: list[Enemy]
-    boss: Enemy
-    encounter: list[Encounter]
+    events: list[Event] = field(default_factory=list)
 
 
 @dataclass_json
@@ -157,3 +167,24 @@ class GenerationRequest:
     ],
     grammar = None,
     grammar_string = None
+
+
+# Never Will Json
+
+@dataclass
+class CalculationResult:
+    name: str
+    desc: str
+    stat: Stat
+
+
+@dataclass
+class CharacterCreationQueueItem:
+    interaction: discord.Interaction
+    description: str
+
+
+@dataclass
+class DungeonCreationQueueItem:
+    interaction: discord.Interaction
+    material: str = "Tutorial Book"

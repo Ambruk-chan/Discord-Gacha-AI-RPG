@@ -3,6 +3,7 @@ import discord
 from discord import app_commands
 import config
 from bot.rpg import rpg_engine
+from util.models import *
 
 
 def setup_rpg_commands(tree: app_commands.CommandTree):
@@ -33,11 +34,10 @@ class CharacterCreatorModal(discord.ui.Modal, title='Create Character'):
 
     async def on_submit(self, interaction: discord.Interaction):
         description = self.children[0].value
-        queue_item = {
-            "interaction_data": interaction,
-            "description": description
-        }
-        config.process_player_request.put_nowait(queue_item)
+        queue_item = CharacterCreationQueueItem(
+            interaction,description
+        )
+        config.character_creation_queue.put_nowait(queue_item)
         await interaction.response.send_message("Creating Character Please Wait~")
 
 

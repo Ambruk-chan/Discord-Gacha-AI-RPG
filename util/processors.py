@@ -1,4 +1,6 @@
 import random
+from typing import List
+
 from util.models import *
 from util import prompts
 from util import llmapi
@@ -41,21 +43,63 @@ def regex_llm_attribute(generated_attribute):
     pattern = r'\[(.*?)\]'
     matches = re.findall(pattern, generated_attribute)
 
-    # Remove any leading/trailing whitespace from each attribute
-    result = [attr.strip() for attr in matches]
+    return matches  # Directly return the list of matches
 
+
+async def process_attributes(desc: str, name: str, type: str) -> CalculationResult:
+    atrb_prompt = await prompts.attribute_from_description_prompt(desc, name, type)
+    #print(atrb_prompt)
+    generated_attribute = await llmapi.send_to_llm(atrb_prompt)
+    #print(generated_attribute)
+    attributes_list = regex_llm_attribute(generated_attribute.results[0].text)
+    #print(attributes_list)
+    stat = await calculate_stat(attributes_list)
+    print(stat)
+    result = CalculationResult(name, attributes_list[0], stat)
     return result
 
 
-async def process_attributes(desc: str)->Stat:
-    Stat()
-    atrb_prompt = await prompts.attribute_from_description_prompt(desc)
-    print(atrb_prompt)
-    generated_attribute = await llmapi.send_to_llm(atrb_prompt)
-    print(generated_attribute)
-    attributes_list = regex_llm_attribute(generated_attribute.results[0].text)
-    print(attributes_list)
-    stat = await calculate_stat(attributes_list)
-    print(stat)
+def regex_llm_choices(text, desc) -> List[Choice]:
+    choices = []
+    pattern = r'([A-C])\. \[(\w+) Action: (.+?)\]\n\[Material Get: (.+?)\]'
+    matches = re.findall(pattern, text)
 
-    return stat
+    for match in matches:
+        choice = Choice()
+        choice.desc = desc
+        choice.type = match[1]  # Physical, Mental, or Thaumaturgic
+        choice.action = match[2]  # Add the action description
+        choice.materials = [mat.strip().strip('"') for mat in match[3].split(',')]
+        choices.append(choice)
+
+    return choices
+
+
+async def process_choices(desc: str, player: Player) -> List[Choice]:
+    choices_prompt = await prompts.choices_from_description_prompt(desc, player)
+    #print(atrb_prompt)
+    generated_choices = await llmapi.send_to_llm(choices_prompt)
+
+    choices_list = regex_llm_choices(generated_choices.results[0].text, desc)
+
+    return choices_list
+
+
+
+def regex_llm_materials(text: str) -> list[str]:
+    # Use regex to find all text within square brackets
+    pattern = r'\[(.*?)\]'
+    matches = re.findall(pattern, text)
+
+    # Return the list of matched items
+    return matches
+
+
+async def process_materials(desc: str) -> list[str]:
+    material_prompt = await prompts.materials_from_description_prompt(desc)
+    # print(atrb_prompt)
+    generated_materials = await llmapi.send_to_llm(material_prompt)
+    # print(generated_attribute)
+    choices_list = regex_llm_materials(generated_materials.results[0].text)
+
+    return choices_list

@@ -9,8 +9,10 @@ import config
 from bot.alchemy import alchemy_bot
 from bot.battle import battle_bot
 from bot.dungeon import dungeon_bot
+from bot.dungeon import dungeon_engine
 from bot.rpg import rpg_bot
 from bot.rpg import rpg_engine
+
 
 load_dotenv()
 discord_token: str | None = os.getenv("DISCORD_TOKEN")
@@ -33,6 +35,7 @@ async def on_ready():
                                      headers=config.text_api["headers"])
 
     task = asyncio.create_task(rpg_engine.generate_new_player())
+    task2 = asyncio.create_task(dungeon_engine.create_dungeon())
 
     battle_bot.setup_battle_commands(tree)
     rpg_bot.setup_rpg_commands(tree)
@@ -43,13 +46,13 @@ async def on_ready():
     print(f'Discord Bot is up and running.')
 
 
-@client.event
-async def on_message(message):
-    if message is None:
-        return
-
-    # Trigger the Observer Behavior (The command that listens to Keyword)
-    print("Message Get~")
+# @client.event
+# async def on_message(message):
+#     if message is None:
+#         return
+#
+#     # Trigger the Observer Behavior (The command that listens to Keyword)
+#     print("Message Get~")
 
 
 # Run the Bot

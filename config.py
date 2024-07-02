@@ -9,8 +9,8 @@ global image_api
 global character_card
 global tts_config, tts_model, gpt_cond_latent, speaker_embedding
 
-process_player_request = asyncio.Queue()
-
+character_creation_queue = asyncio.Queue()
+dungeon_creation_queue = asyncio.Queue()
 
 bot_display_name = "Aktiva-AI"
 bot_default_avatar = "https://i.imgur.com/mxlcovm.png"
@@ -20,4 +20,3 @@ bot_last_message_time = {}
 bot_last_mentioned_channel = {}
 intents: discord.Intents = discord.Intents.all()
 client: discord.Client = discord.Client(command_prefix='/', intents=intents)
-
