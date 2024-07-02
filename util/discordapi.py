@@ -6,13 +6,20 @@ async def send_webhook_message(channel: discord.abc.GuildChannel, content: str, 
     if isinstance(channel, discord.TextChannel) or isinstance(channel, discord.Thread):
         webhook_list = await channel.webhooks()
 
-        for webhook in webhook_list:
-            if webhook.name == "RPGAI":
-                await webhook.send(content, username=username, avatar_url=avatar_url)
-                return
+        webhook = None
+        for existing_webhook in webhook_list:
+            if existing_webhook.name == "RPGAI":
+                webhook = existing_webhook
+                break
 
-        webhook = await channel.create_webhook(name="RPGAI")
-        await webhook.send(content, username=username, avatar_url=avatar_url)
+        if not webhook:
+            webhook = await channel.create_webhook(name="RPGAI")
+
+        # Split content into chunks of 2000 characters or less
+        chunks = [content[i:i+2000] for i in range(0, len(content), 2000)]
+
+        for chunk in chunks:
+            await webhook.send(chunk, username=username, avatar_url=avatar_url)
     else:
         print("The channel must be either a TextChannel or a Thread.")
     return

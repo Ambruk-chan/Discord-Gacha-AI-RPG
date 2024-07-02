@@ -1,229 +1,229 @@
 {
-    "AttributeInfo": {
-      "attributes": [
-        {
-            "name": "Newtonian",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 1,
-            "stat": "Hybrid" 
-        },
-        {
-            "name": "Quantum",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 2,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Relativity",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 3,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Combustion",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 1,
-            "stat": "Attack"
-        },
-        {
-            "name": "Electric",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 2,
-            "stat": "Attack"
-        },
-        {
-            "name": "Radioactive",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 3,
-            "stat": "Attack"
-        },
-        {
-            "name": "Machine",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 1,
-            "stat": "Defend"
-        },
-        {
-            "name": "Robotic",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 2,
-            "stat": "Defend"
-        },
-        {
-            "name": "Cybernetic",
-            "desc": "string",
-            "type": "Phys",
-            "rare": 3,
-            "stat": "Defend"
-        },
-        {
-            "name": "Magic",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 1,
-            "stat": "Attack"
-        },
-        {
-            "name": "Miracle",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 2,
-            "stat": "Attack"
-        },
-        {
-            "name": "Fate",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 3,
-            "stat": "Attack"
-        },
-        {
-            "name": "Elemental",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 1,
-            "stat": "Defend"
-        },
-        {
-            "name": "Nature",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 2,
-            "stat": "Defend"
-        },
-        {
-            "name": "Creation",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 3,
-            "stat": "Defend"
-        },
-        {
-            "name": "Spiritual",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 1,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Divine",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 2,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Eldritch",
-            "desc": "string",
-            "type": "Thaum",
-            "rare": 3,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Willpower",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 1,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Determination",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 2,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Absurdism",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 3,
-            "stat": "Hybrid"
-        },
-        {
-            "name": "Faith",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 1,
-            "stat": "Defend"
-        },
-        {
-            "name": "Stoicism",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 2,
-            "stat": "Defend"
-        },
-        {
-            "name": "Nihilism",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 3,
-            "stat": "Defend"
-        },
-        {
-            "name": "Motivation",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 1,
-            "stat": "Attack"
-        },
-        {
-            "name": "Passion",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 2,
-            "stat": "Attack"
-        },
-        {
-            "name": "Obsession",
-            "desc": "string",
-            "type": "Mental",
-            "rare": 3,
-            "stat": "Attack"
-        }
-      ],
-      "types": [
-        {
-            "name": "Phys",
-            "desc": "string"
-        },
-        {
-            "name": "Mental",
-            "desc": "string"
-        },
-        {
-            "name": "Thaum",
-            "desc": "string"
-        }
-      ],
-      "stat":[
-        {
-            "name": "Hybrid",
-            "atk": 30,
-            "res": 30,
-            "hp": 100
-        },
-        {
-            "name": "Attack",
-            "atk": 50,
-            "res": 10,
-            "hp": 50
-        },
-        {
-            "name": "Defend",
-            "atk": 10,
-            "res": 50,
-            "hp": 200
-        }
-      ]
-    }
+  "AttributeInfo": {
+    "attributes": [
+      {
+        "name": "Newtonian",
+        "desc": "Entities or objects imbued with \"Newtonian\" qualities embody the rigid, clockwork precision of classical physics. They exude an aura of mathematical certainty, their movements and actions governed by immutable laws of motion and force. Newtonian creations radiate an air of mechanical reliability, their existence a testament to the predictable, measurable nature of the physical world in all its mathematical glory.",
+        "type": "Phys",
+        "rare": 1,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Quantum",
+        "desc": "Entities or artifacts that possess \"Quantum\" qualities embody the enigmatic, paradoxical nature of the subatomic world. They exude an aura of uncertainty and unpredictability, their existence a testament to the bizarre, counterintuitive laws that govern the smallest of particles. Quantum entities radiate a sense of otherworldly mystery, their presence a reminder of the profound depths of scientific discovery.",
+        "type": "Phys",
+        "rare": 2,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Relativity",
+        "desc": "Entities or objects imbued with \"Relativity\" qualities seem to exist in a fluid, ever-shifting realm. They exude a sense of flexibility and adaptability, their nature constantly altering to fit changing circumstances. Relativistic entities are never static, their existence a testament to the dynamic and fluid nature of reality. They embody the principle of relativity, ever-changing and evolving, their form a reflection of the world's ceaseless flux.",
+        "type": "Phys",
+        "rare": 3,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Combustion",
+        "desc": "Entities or objects characterized by \"Combustion\" are primal, fierce, and explosive. They exude a sense of raw, uncontrolled power, their existence an embodiment of the destructive force of fire. Combustion entities radiate a blazing heat, their energy a potent reminder of the transformative power of the elemental forces. They are explosive, unpredictable, and dangerously captivating, their presence a constant threat of conflagration.",
+        "type": "Phys",
+        "rare": 1,
+        "stat": "Attack"
+      },
+      {
+        "name": "Electric",
+        "desc": "Entities or artifacts labeled \"Electric\" teem with crackling, volatile energy. They embody the charged, pulsating essence of electricity, their very existence a testament to the raw power of the fourth state of matter. Electric entities radiate a palpable sense of danger, their being a reminder of the life-giving, yet deadly force that courses through the heart of the world.",
+        "type": "Phys",
+        "rare": 2,
+        "stat": "Attack"
+      },
+      {
+        "name": "Radioactive",
+        "desc": "Entities or objects labeled as \"Radioactive\" are imbued with the raw, unstable energy of the atomic age. They emit a palpable aura of danger, their presence a constant reminder of the potent forces that lurk beneath the surface. Radioactive beings and artifacts pulsate with a dangerous, unpredictable vitality, their existence a testament to the unstable nature of the cosmos. Their power is both captivating and terrifying, a stark reminder of the forces that shape and destroy.",
+        "type": "Phys",
+        "rare": 3,
+        "stat": "Attack"
+      },
+      {
+        "name": "Machine",
+        "desc": "Entities or artifacts with \"Machine\" qualities are sophisticated, automated entities that echo the sounds of whirring gears and humming motors. They exude a sense of industrial might, their very presence a tribute to the triumph of human ingenuity. Machines radiate an aura of unyielding durability, their existence a testament to the relentless march of technological progress.",
+        "type": "Phys",
+        "rare": 1,
+        "stat": "Defend"
+      },
+      {
+        "name": "Robotic",
+        "desc": "Entities or objects possessing \"Robotic\" attributes are automatons of intricate design, often made of metal and synthetic materials. They exude a sense of purposeful efficiency, their movements and actions precise and predictable. Robotic beings radiate an aura of calm efficiency, their existence a testament to the potential of synthetic intelligence. They embody the promise of technological advancement, their presence a manifestation of human ingenuity.",
+        "type": "Phys",
+        "rare": 2,
+        "stat": "Defend"
+      },
+      {
+        "name": "Cybernetic",
+        "desc": "Entities or objects labelled as \"Cybernetic\" are the fusion of organic and inorganic, a blend of flesh and technology. They exude a futuristic, hi-tech aura, their form a testament to the intertwined nature of man and machine. Cybernetic creations radiate a chilling, otherworldly energy, their existence a haunting glimpse into a world where the boundaries between the living and the synthetic blur.",
+        "type": "Phys",
+        "rare": 3,
+        "stat": "Defend"
+      },
+      {
+        "name": "Magic",
+        "desc": "Entities or objects suffused with \"Magic\" possess an enchanting allure, their presence an embodiment of the mystical and arcane. They exude a sense of otherworldly power, their existence a testament to the unseen forces that underpin the fabric of the universe. Magic entities radiate an aura of unlimited potential, their very being a conduit for the extraordinary. They embody the boundless realms of magic, their presence a mysterious, unpredictable force to be reckoned with.",
+        "type": "Thaum",
+        "rare": 1,
+        "stat": "Attack"
+      },
+      {
+        "name": "Miracle",
+        "desc": "Entities or objects branded with \"Miracle\" qualities possess an otherworldly, almost divine aura. They exude a sense of wonder and awe, their existence a testament to the inexplicable mysteries of the universe. Miraculous phenomena radiate a celestial energy, their presence a potent reminder of the ineffable wonders that lie beyond our comprehension. They embody the inexplicable, the inexplicable, the transcendent, and the impossible - the stuff of legends.",
+        "type": "Thaum",
+        "rare": 2,
+        "stat": "Attack"
+      },
+      {
+        "name": "Fate",
+        "desc": "Entities or objects bearing the \"Fate\" quality carry the inexorable weight of destiny, their existence dictated by an unseen hand. They exude an aura of inevitability, their actions foretold in the tapestry of time. Fateful beings and artifacts are bound to paths preordained, their journey a dance with the cosmic forces that weave the fabric of existence. Their role, a narrative woven into the tapestry of history, is inescapable and unchanging.",
+        "type": "Thaum",
+        "rare": 3,
+        "stat": "Attack"
+      },
+      {
+        "name": "Elemental",
+        "desc": "Entities or artifacts bearing the \"Elemental\" quality pulsate with the raw, primordial essence of the five elements. Fire, Water, Air, Earth, and Lightning. They embody the untamed forces of nature, channeling energies that shape the world itself. Elementals resonate with the fundamental building blocks of existence, their very being a conduit for the wild, unfettered power that courses through the veins of the world.",
+        "type": "Thaum",
+        "rare": 1,
+        "stat": "Defend"
+      },
+      {
+        "name": "Nature",
+        "desc": "Entities or objects tagged as \"Nature\" are intrinsically tied to the natural world, embodying the raw, organic beauty of the wild. They exude an aura of wildness and vitality, their very being a living testament to the untamed spirit of the earth. Nature-based entities radiate the essence of life, their existence a reminder of the interconnected web of life and its ceaseless cycle of growth and decay.",
+        "type": "Thaum",
+        "rare": 2,
+        "stat": "Defend"
+      },
+      {
+        "name": "Creation",
+        "desc": "Entities or items imbued with \"Creation\" are the embodiment of craftsmanship, the product of skilled hands and artistic vision. They exude an aura of artistry, their form a testament to the imaginative potential of the mind. Creation entities radiate a warm, inviting energy, their existence a celebration of human ingenuity and the power of design.",
+        "type": "Thaum",
+        "rare": 3,
+        "stat": "Defend"
+      },
+      {
+        "name": "Spiritual",
+        "desc": "Beings or objects imbued with \"Spiritual\" qualities embody the ethereal, the transcendent, and the divine. They exude an aura of mystical energy, their essence a beacon of wisdom and enlightenment. Spiritual entities radiate a sense of inner peace, their existence a testament to the enduring connection between the physical and the metaphysical. They embody the intangible essence of the soul, their presence a profound reminder of the mysteries of the universe.",
+        "type": "Thaum",
+        "rare": 1,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Divine",
+        "desc": "Entities or artifacts imbued with \"Divine\" qualities radiate a sense of sanctity and celestial grace. They exude an aura of divine wisdom and unmatched power, their existence a testament to the gods themselves. Divine creations embody the spiritual essence of the cosmos, their presence a constant reminder of the sacred order of the universe. They inspire reverence and devotion, their very being a reflection of the divine will.",
+        "type": "Thaum",
+        "rare": 2,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Eldritch",
+        "desc": "Entities or objects imbued with \"Eldritch\" qualities are inexplicable, otherworldly, and often terrifying. They exude an aura of cosmic horror, their very existence a challenge to the limits of human comprehension. Eldritch entities radiate an overwhelming sense of the unknowable, their existence a stark reminder of the vastness and strangeness of the universe. They embody the incomprehensible, the alien, the alienating, making the familiar seem surreal.",
+        "type": "Thaum",
+        "rare": 3,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Willpower",
+        "desc": "Entities and objects imbued with \"Willpower\" exude an aura of resilience and determination. They are driven by an indomitable spirit, their existence a testament to the power of the human will. Willpower-infused entities radiate an energy of focus and fortitude, their presence a force to be reckoned with. They embody the strength of the human spirit, overcoming all obstacles with unyielding resolve.",
+        "type": "Mental",
+        "rare": 1,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Determination",
+        "desc": "Entities or objects characterized by \"Determination\" exude a resolute, unyielding spirit. They are driven by a forceful, unwavering will to overcome obstacles and achieve their goals. Determined beings or artifacts are defined by their steadfast tenacity, their existence a testament to the power of unwavering conviction. Their very being serves as an inspiration, a beacon of resilience in the face of adversity.",
+        "type": "Mental",
+        "rare": 2,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Absurdism",
+        "desc": "Entities or objects marked by \"Absurdism\" defy logic and reason, twisting and inverting the mundane to create a world of nonsensical whimsy. They embody the absurd, invoking laughter and confusion in equal measure. Absurdistic entities radiate an aura of the bizarre and unexpected, their existence a commentary on the inherent absurdity of life. They are the embodiment of existential humor, a reminder that reality is often stranger than fiction.",
+        "type": "Mental",
+        "rare": 3,
+        "stat": "Hybrid"
+      },
+      {
+        "name": "Faith",
+        "desc": "Entities or objects imbued with \"Faith\" qualities exude a sense of spiritual resonance, embodying the deep, abiding trust in a higher power. They radiate a comforting aura of divine presence, their existence a tribute to the belief in something greater than oneself. Faithful entities are the embodiment of hope and devotion, their purpose a testament to the profound power of belief and the human spirit.",
+        "type": "Mental",
+        "rare": 1,
+        "stat": "Defend"
+      },
+      {
+        "name": "Stoicism",
+        "desc": "Entities or objects imbued with \"Stoic\" qualities exude an air of imperturbable calm and resilience. They radiate a profound sense of inner strength, their very being a testament to the enduring power of emotional fortitude. Stoic beings or objects are unflappable, their countenance a face carved from granite and their demeanor a bastion against the tempests of the world. They embody the serene, unshakeable spirit that withstands the trials of time.",
+        "type": "Mental",
+        "rare": 2,
+        "stat": "Defend"
+      },
+      {
+        "name": "Nihilism",
+        "desc": "Individuals or objects imbued with \"Nihilistic\" qualities exude a pervasive sense of despair and meaninglessness. They embody the philosophy of Nihilism, the belief that existence is pointless. Nihilistic entities radiate an aura of desolation, their existence a stark reminder of the futility of human endeavor and the inevitability of decay. They embody the darkness of an empty, indifferent universe, their presence a chilling echo of the void.",
+        "type": "Mental",
+        "rare": 3,
+        "stat": "Defend"
+      },
+      {
+        "name": "Motivation",
+        "desc": "Entities or artifacts imbued with \"Motivation\" possess a driving force, a purpose that propels them forward. They exude an aura of unyielding determination, their existence a testament to the power of ambition and resolve. Motivated entities and objects radiate a focused, energetic presence, their purpose a beacon of unstoppable progress. Their actions, fueled by a potent will to achieve, are relentless and unwavering.",
+        "type": "Mental",
+        "rare": 1,
+        "stat": "Attack"
+      },
+      {
+        "name": "Passion",
+        "desc": "Entities or objects imbued with \"Passion\" radiate an infectious enthusiasm, a fiery, impassioned energy. They embody the boundless energy of unbridled emotion, their very existence a reflection of the heart's raw power. Passionate entities and objects exude a palpable intensity, their presence a catalyst for the most profound of human experiences. Their essence is a potent reminder of the transformative potential of love, desire, and fervor.",
+        "type": "Mental",
+        "rare": 2,
+        "stat": "Attack"
+      },
+      {
+        "name": "Obsession",
+        "desc": "Entities or objects marked by \"Obsession\" exude a palpable intensity, their very being consumed by a single-minded focus. They radiate an aura of fixation, their existence a testament to an all-encompassing desire. Obsessive entities and artifacts become living embodiments of their chosen pursuit, their existence a relentless pursuit of a singular goal.",
+        "type": "Mental",
+        "rare": 3,
+        "stat": "Attack"
+      }
+    ],
+    "types": [
+      {
+        "name": "Phys",
+        "desc": "string"
+      },
+      {
+        "name": "Mental",
+        "desc": "string"
+      },
+      {
+        "name": "Thaum",
+        "desc": "string"
+      }
+    ],
+    "modifier": [
+      {
+        "name": "Hybrid",
+        "atk": 30,
+        "res": 30,
+        "hp": 100
+      },
+      {
+        "name": "Attack",
+        "atk": 50,
+        "res": 10,
+        "hp": 50
+      },
+      {
+        "name": "Defend",
+        "atk": 10,
+        "res": 50,
+        "hp": 200
+      }
+    ]
   }
+}
