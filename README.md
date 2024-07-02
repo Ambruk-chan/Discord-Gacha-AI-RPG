@@ -7,13 +7,13 @@ Welp, it's certainly harder than I expected!!!
 
 ### Character Creation
 - [x] Character and Starting Stat Generation with AI 
-- [ ] Auto Character Definition with AI
+- [x] Auto Character Definition with AI
 - [ ] Auto Equipment Creator with AI
 
 ### Dungeon Crawling
-- [ ] Dungeon Creation with AI
-- [ ] Encounter Creation with AI
-- [ ] Enemy Creation with AI
+- [x] Dungeon Creation with AI
+- [x] Encounter Creation with AI
+- [x] Enemy Creation with AI
 - [ ] Dungeon Playthrough with AI Narration
 
 ### Battle System
