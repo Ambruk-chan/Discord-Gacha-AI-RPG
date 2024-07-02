@@ -121,7 +121,7 @@ class GenerationRequest(DataClassJsonMixin):
     max_tokens = 1024
     max_context_length = 8192
     genamt = 1095
-    temp = 1.20,
+    temp = 1.20
     top_k = 0
     top_p = 0.75
     top_a = 0
@@ -140,6 +140,6 @@ class GenerationRequest(DataClassJsonMixin):
         4,
         2,
         5
-    ],
-    grammar = None,
-    grammar_string = None
+    ]
+    grammar: str | None = None
+    grammar_string: str | None = None

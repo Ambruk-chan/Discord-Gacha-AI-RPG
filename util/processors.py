@@ -36,7 +36,7 @@ async def calculate_stat(input_attributes: list[str]) -> Stat:
     return result_stat
 
 
-def regex_llm_attribute(generated_attribute):
+def regex_llm_attribute(generated_attribute: str) -> list[str]:
     # Use regex to find all attributes between square brackets
     pattern = r'\[(.*?)\]'
     matches = re.findall(pattern, generated_attribute)
@@ -47,13 +47,14 @@ def regex_llm_attribute(generated_attribute):
     return result
 
 
-async def process_attributes(desc: str)->Stat:
+async def process_attributes(desc: str) -> Stat:
     Stat()
     atrb_prompt = await prompts.attribute_from_description_prompt(desc)
     print(atrb_prompt)
     generated_attribute = await llmapi.send_to_llm(atrb_prompt)
     print(generated_attribute)
-    attributes_list = regex_llm_attribute(generated_attribute.results[0].text)
+    # FIXME: generated_attribute can be null
+    attributes_list = [] if not generated_attribute else regex_llm_attribute(generated_attribute.results[0].text)
     print(attributes_list)
     stat = await calculate_stat(attributes_list)
     print(stat)
