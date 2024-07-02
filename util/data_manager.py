@@ -3,7 +3,7 @@ import os
 from util.models import *
 import json
 
-def read_character_data(player_name: str) -> Player:
+def read_character_data(player_name: str) -> Player | None:
     file_path = f'./data/player/{player_name}.json'
     full_path = os.path.abspath(file_path)
     print(f"Reading from file: {full_path}")

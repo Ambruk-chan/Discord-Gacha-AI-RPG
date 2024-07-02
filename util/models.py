@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from dataclasses_json import dataclass_json
+from dataclasses_json import DataClassJsonMixin
 
 
-@dataclass_json
 @dataclass
-class Stat:
+class Stat(DataClassJsonMixin):
     hp: int = 0
     phys_atk: int = 0
     phys_def: int = 0
@@ -17,17 +16,15 @@ class Stat:
     attributes: list = field(default_factory=list)
 
 
-@dataclass_json
 @dataclass
-class Equipment:
+class Equipment(DataClassJsonMixin):
     name: str = ""
     desc: str = ""
     stat: Stat = field(default_factory=Stat)
 
 
-@dataclass_json
 @dataclass
-class Player:
+class Player(DataClassJsonMixin):
     name: str = ""
     desc: str = ""
     materials: list[str] = field(default_factory=list)
@@ -38,18 +35,16 @@ class Player:
     power: Equipment = field(default_factory=Equipment)
 
 
-@dataclass_json
 @dataclass
-class Enemy:
+class Enemy(DataClassJsonMixin):
     name: str
     desc: str
     materials: list[str]
     stat: Stat
 
 
-@dataclass_json
 @dataclass
-class Encounter:
+class Encounter(DataClassJsonMixin):
     name: str
     description: str
     dmg: int
@@ -57,9 +52,8 @@ class Encounter:
     material: list[str]
 
 
-@dataclass_json
 @dataclass
-class Dungeon:
+class Dungeon(DataClassJsonMixin):
     name: str
     floors: int
     enemies: list[Enemy]
@@ -67,17 +61,15 @@ class Dungeon:
     encounter: list[Encounter]
 
 
-@dataclass_json
 @dataclass
-class Summon:
+class Summon(DataClassJsonMixin):
     name: str
     desc: str
     stat: Stat
 
 
-@dataclass_json
 @dataclass
-class Attribute:
+class Attribute(DataClassJsonMixin):
     name: str
     desc: str
     type: str
@@ -85,47 +77,41 @@ class Attribute:
     stat: str
 
 
-@dataclass_json
 @dataclass
-class AttributeType:
+class AttributeType(DataClassJsonMixin):
     name: str
     desc: str
 
 
-@dataclass_json
 @dataclass
-class AttributeModifier:
+class AttributeModifier(DataClassJsonMixin):
     name: str
     atk: int
     res: int
     hp: int
 
 
-@dataclass_json
 @dataclass
-class AttributeInfo:
+class AttributeInfo(DataClassJsonMixin):
     attributes: list[Attribute]
     types: list[AttributeType]
     modifier: list[AttributeModifier]
 
 
 # Okay, these are the stuff the AI will generate that isn't stored
-@dataclass_json
 @dataclass
-class Result:
+class Result(DataClassJsonMixin):
     text: str
     finish_reason: str
 
 
-@dataclass_json
 @dataclass
-class Response:
+class Response(DataClassJsonMixin):
     results: list[Result] = field(default_factory=list)
 
 
-@dataclass_json
 @dataclass
-class GenerationRequest:
+class GenerationRequest(DataClassJsonMixin):
     prompt = ""
     stop_sequence = []
     add_bos_token = True
