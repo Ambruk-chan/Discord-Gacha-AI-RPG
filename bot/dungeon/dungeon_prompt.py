@@ -18,3 +18,19 @@ def dungeon_creation_prompt(catalyst, player_data:Player):
 
 
     return request
+
+
+def enemy_intro_prompt(action):
+    return None
+
+
+def enemy_action_prompt(action,battle_result):
+    return None
+
+
+def enemy_defeat_prompt(action):
+    return None
+
+
+def epilogue_prompt(dungeon, history):
+    return None

@@ -46,7 +46,7 @@ def regex_llm_attribute(generated_attribute):
     return matches  # Directly return the list of matches
 
 
-async def process_attributes(desc: str, name: str, type: str) -> CalculationResult:
+async def process_attributes(desc: str, name: str, type: str, level = 5) -> CalculationResult:
     atrb_prompt = await prompts.attribute_from_description_prompt(desc, name, type)
     #print(atrb_prompt)
     generated_attribute = await llmapi.send_to_llm(atrb_prompt)

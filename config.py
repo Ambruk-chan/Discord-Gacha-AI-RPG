@@ -11,6 +11,7 @@ global tts_config, tts_model, gpt_cond_latent, speaker_embedding
 
 character_creation_queue = asyncio.Queue()
 dungeon_creation_queue = asyncio.Queue()
+dungeon_advance_queue = asyncio.Queue()
 
 bot_display_name = "Aktiva-AI"
 bot_default_avatar = "https://i.imgur.com/mxlcovm.png"

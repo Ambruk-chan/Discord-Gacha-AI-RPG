@@ -7,7 +7,7 @@ from util.models import *
 
 
 def setup_rpg_commands(tree: app_commands.CommandTree):
-    group = app_commands.Group(name="rpg")
+    group = app_commands.Group(name="rpg", description="RPG Commands!!!")
 
     @group.command(name="begin", description="Begin Your Story!!!")
     async def rpg_stat(interaction: discord.Interaction):

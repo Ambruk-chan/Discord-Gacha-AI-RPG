@@ -3,11 +3,11 @@ from util.models import *
 from util import data_manager
 
 
-async def attribute_from_description_prompt(item_desc: str, name: str = "Not Decided", type: str = "Object"):
+async def attribute_from_description_prompt(item_desc: str, name: str = "Not Decided", type: str = "Object", level=5):
     request = GenerationRequest()
     attributes = await data_manager.read_attribute_data()
     attribute_info = format_attribute_info(attributes)
-    grammar = create_attributes_grammar(name, type, attributes)
+    grammar = create_attributes_grammar(name, type, attributes, level)
     prompt = f"Analyze the given input based on the following data:{attribute_info}\n\n\nBased on the description given by User, Attribute Creator will give 2 fitting attributes for the item.\n\n### Instruction:\nUser: A fish\n\n### Response:\nAttribute Creator: Fish's Summary: [a regular water-bound creature. Being a simple creature that they are, fishes are attuned naturally to the element of water.]\n\nAttributes: [Natural],[Elemental]<END>\n\n### Instruction:\nUser: {item_desc}\n\n### Response (1 paragraphs, descriptive, creative):\nAttribute Creator:"
     request.prompt = prompt
     request.stop_sequence = ["<END>"]
@@ -64,7 +64,7 @@ def format_attribute_info(attr_info: AttributeInfo) -> str:
     return output
 
 
-def create_attributes_grammar(item_name, item_type, attribute_info: AttributeInfo, max_level: int = 1) -> str:
+def create_attributes_grammar(item_name, item_type, attribute_info: AttributeInfo, max_level: int = 5) -> str:
     attribute_list = []
     for attribute in attribute_info.attributes:
         if attribute.rare <= max_level:

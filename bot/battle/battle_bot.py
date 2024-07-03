@@ -3,7 +3,7 @@ import discord
 
 
 def setup_battle_commands(tree: app_commands.CommandTree):
-    group = app_commands.Group(name="battle")
+    group = app_commands.Group(name="battle", description="Battle Commands!!!")
 
     @group.command(name="help", description="Show Battle Tutorial!")
     async def battle_help(interaction: discord.Interaction):

@@ -40,7 +40,7 @@ async def on_ready():
     battle_bot.setup_battle_commands(tree)
     rpg_bot.setup_rpg_commands(tree)
     dungeon_bot.setup_dungeon_commands(tree)
-    alchemy_bot.setup_alchemy_commands(tree)
+    #alchemy_bot.setup_alchemy_commands(tree)
 
     await tree.sync(guild=None)
     print(f'Discord Bot is up and running.')
