@@ -9,7 +9,10 @@ from dataclasses_json import dataclass_json
 @dataclass_json
 @dataclass
 class Stat:
+
+
     hp: int = 0
+    max_hp = 0
     phys_atk: int = 0
     phys_def: int = 0
     phys_res: int = 0

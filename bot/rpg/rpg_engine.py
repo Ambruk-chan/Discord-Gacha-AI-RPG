@@ -22,7 +22,7 @@ async def generate_new_player():
 
         if exist:
             # Tell user that character already exists
-            await discordapi.send_webhook_message(interaction.channel, f"The Player {player_name} already exist,user", )
+            await discordapi.send_webhook_message(interaction.channel, f"The Player {player_name} already exist,user")
             config.character_creation_queue.task_done()
         else:
             # Make the character
@@ -59,15 +59,15 @@ def player_info_string(player: Player) -> str:
         if stat.phys_atk > 0:
             stat_lines.append(f"Physical Attack: {stat.phys_atk}")
         if stat.phys_def > 0:
-            stat_lines.append(f"Physical Defense: {stat.phys_def}")
+            stat_lines.append(f"Physical Defense: {stat.phys_res}")
         if stat.men_atk > 0:
             stat_lines.append(f"Mental Attack: {stat.men_atk}")
         if stat.men_def > 0:
-            stat_lines.append(f"Mental Defense: {stat.men_def}")
+            stat_lines.append(f"Mental Defense: {stat.men_res}")
         if stat.thaum_atk > 0:
             stat_lines.append(f"Thaumaturgical Attack: {stat.thaum_atk}")
         if stat.thaum_def > 0:
-            stat_lines.append(f"Thaumaturgical Defense: {stat.thaum_def}")
+            stat_lines.append(f"Thaumaturgical Defense: {stat.thaum_res}")
         if stat.pata_dmg > 0:
             stat_lines.append(f"Pataphysical Damage: {stat.pata_dmg}")
         if stat.pata_rate > 0:

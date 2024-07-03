@@ -20,20 +20,21 @@ async def calculate_stat(input_attributes: list[str]) -> Stat:
                 # Apply 20% random modifier
                 atk = int(modifier.atk * random.uniform(0.8, 1.2))
                 res = int(modifier.res * random.uniform(0.8, 1.2))
-                hp = int(modifier.hp * random.uniform(0.8, 1.2))
+                max_hp = int(modifier.hp * random.uniform(0.8, 1.2))
 
                 # Update stats based on attribute type
                 if attr.type == "Thaum":
                     result_stat.thaum_atk += atk
-                    result_stat.thaum_def += res
+                    result_stat.thaum_res += res
                 elif attr.type == "Phys":
                     result_stat.phys_atk += atk
-                    result_stat.phys_def += res
+                    result_stat.phys_res += res
                 elif attr.type == "Mental":
                     result_stat.men_atk += atk
-                    result_stat.men_def += res
+                    result_stat.men_res += res
 
                 result_stat.hp += hp
+                result_stat.max_hp +=hp
 
     return result_stat
 
@@ -45,7 +46,7 @@ def regex_llm_attribute(generated_attribute):
 
     return matches  # Directly return the list of matches
 
-
+#Get Stat from Attribute
 async def process_attributes(desc: str, name: str, type: str, level = 5) -> CalculationResult:
     atrb_prompt = await prompts.attribute_from_description_prompt(desc, name, type)
     #print(atrb_prompt)
