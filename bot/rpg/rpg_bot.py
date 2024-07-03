@@ -34,9 +34,8 @@ class CharacterCreatorModal(discord.ui.Modal, title='Create Character'):
     description = discord.ui.TextInput(label="About Yourself", placeholder="Who Are You?")
 
     async def on_submit(self, interaction: discord.Interaction):
-        description = self.children[0].value
         queue_item = CharacterCreationQueueItem(
-            interaction,description
+            interaction, self.description.value
         )
         config.character_creation_queue.put_nowait(queue_item)
 
