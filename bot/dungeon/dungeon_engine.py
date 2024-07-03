@@ -50,7 +50,8 @@ def enemy_action_ai(enemy_stat: Stat) -> BattleAction:
 
     return BattleAction(action=chosen_action, type=chosen_type, quip="")
 
-def calculate_battle(attacker:Stat, target:Stat, action:BattleAction):
+
+def calculate_battle(attacker: Stat, target: Stat, action: BattleAction):
     if action.action == ActionType.ATTACK:
         damage = 0
         if action.type == DamageType.PHYSICAL:
@@ -78,6 +79,7 @@ def calculate_battle(attacker:Stat, target:Stat, action:BattleAction):
 
     return BattleResult(attacker=attacker, target=target)
 
+
 async def player_action(action) -> DungeonAction:
     enemy: Enemy = action.dungeon.events[action.floor].event
     if action.player.turn == False:
@@ -88,7 +90,8 @@ async def player_action(action) -> DungeonAction:
         player_action: BattleAction = action.battle_action  # Assuming this is set elsewhere
 
         # Calculate Damage ETC
-        battle_result: BattleResult = calculate_battle(attacker=action.player.stat, target=enemy.stat, action=player_action)
+        battle_result: BattleResult = calculate_battle(attacker=action.player.stat, target=enemy.stat,
+                                                       action=player_action)
 
         # Create the Narration
         player_action_prompt = dungeon_prompt.player_action_prompt(action, battle_result)
@@ -117,8 +120,9 @@ async def player_action(action) -> DungeonAction:
 
     return action
 
-async def enemy_action(action)->DungeonAction:
-    enemy:Enemy = action.dungeon.events[action.floor].event
+
+async def enemy_action(action) -> DungeonAction:
+    enemy: Enemy = action.dungeon.events[action.floor].event
     if (enemy.turn == 0):
         # Enemy Does Introduce Itself
         enemy_intro_prompt = dungeon_prompt.enemy_intro_prompt(action)
@@ -129,28 +133,30 @@ async def enemy_action(action)->DungeonAction:
     else:
         # Enemy Does Something (in the system)
         # Either ATK or DEF
-        enemy_action:BattleAction = enemy_action_ai(enemy.stat)
+        enemy_action: BattleAction = enemy_action_ai(enemy.stat)
         # Calculate Damage ETC
-        battle_result:BattleResult = calculate_battle(attacker = enemy.stat, target = action.player.stat, action = enemy_action)
+        battle_result: BattleResult = calculate_battle(attacker=enemy.stat, target=action.player.stat,
+                                                       action=enemy_action)
         # Create the Narration
-        enemy_action_prompt = dungeon_prompt.enemy_action_prompt(action,battle_result)
+        enemy_action_prompt = dungeon_prompt.enemy_action_prompt(action, battle_result)
         enemy_action.quip = (await llmapi.send_to_llm(enemy_action_prompt)).results[0].text
         # Save All That In The Action Data Class
         action.player.stat = battle_result.target
         enemy.stat = battle_result.attacker
         enemy_stat = format_stat(enemy.stat)
-        if action.player.stat.hp >0:
+        if action.player.stat.hp > 0:
             action.result = f"{enemy_action.quip}\n{enemy_stat}"
             action.player.turn = True
         else:
             # Player is dead, just kick them out of the dungeon
             action.player.turn = False
             action.player.progress.position = -1
-            action.player.progress.dungeon_name =""
+            action.player.progress.dungeon_name = ""
             action.result = f"{enemy_action.quip}\n{enemy_stat}"
     return action
 
-async def battle_event(action:DungeonAction) -> DungeonAction:
+
+async def battle_event(action: DungeonAction) -> DungeonAction:
     if action.action is None:
         return await enemy_action(action)
     elif action.player.turn:
@@ -158,38 +164,58 @@ async def battle_event(action:DungeonAction) -> DungeonAction:
     else:
         return await enemy_action(action)
 
-def encounter_event(action:DungeonAction):
+
+def format_encounter(encounter):
     pass
 
 
-async def event_trigger(dungeon, player, interaction:discord.Interaction, decision)->DungeonAction:
+def encounter_action(choice) -> EncounterAction:
+    pass
+
+
+async def encounter_event(action: DungeonAction) -> DungeonAction:
+    encounter = action.dungeon.events[action.floor].event
+    if action.player.turn == False:
+        # Just show the encounter and choices
+        action.result = format_encounter(encounter)
+    else:
+        choice: EncounterAction = encounter_action(action.action.choice)
+        action.player.materials.append(choice.material)
+        action.result = choice.quip
+    return action
+
+
+async def event_trigger(dungeon, player, interaction: discord.Interaction, decision) -> DungeonAction:
     history = await discordapi.get_thread_history(interaction.channel)
     if decision is None:
         player.progress.position = 0
     floor = player.progress.position
     event = dungeon.events[floor].event
-    action = DungeonAction(dungeon,history, player, floor,decision)
+    action = DungeonAction(dungeon, history, player, floor, decision)
     if isinstance(event, Enemy):
         return await battle_event(action)
     elif isinstance(event, Encounter):
         return await encounter_event(action)
     else:
+        action.result = "Something Went Wrong~"
         return action
 
 
 async def dungeon_action():
     while True:
-        item : DungeonAdvanceQueueItem = await config.dungeon_advance_queue.get()
+        item: DungeonAdvanceQueueItem = await config.dungeon_advance_queue.get()
         interaction = item.interaction
         action = item.action
         player: Player = data_manager.read_character_data(interaction.user.display_name)
-        if player.progress.position ==-1: # Means player haven't started the dungeon yet
-            await start_dungeon(interaction,player)
-        elif player.progress.position <6: # Means player is in the middle of the dungeon
-            await advance_dungeon(interaction,player,action)
+        if player.progress.position == -1:  # Means player haven't started the dungeon yet
+            await start_dungeon(interaction, player)
+        elif player.progress.position < 6:  # Means player is in the middle of the dungeon
+            await advance_dungeon(interaction, player, action)
         else:
-            await exit_dungeon(interaction,player)
-async def start_dungeon(interaction,player):
+            await exit_dungeon(interaction, player)
+
+
+async def start_dungeon(interaction, player):
     if player.progress.dungeon_name == "":
         await discordapi.send_webhook_message(interaction.channel, "You Haven't Created A Dungeon Yet")
         config.dungeon_advance_queue.task_done()
@@ -201,11 +227,12 @@ async def start_dungeon(interaction,player):
             await discordapi.send_webhook_message(interaction.channel, message)
             config.dungeon_advance_queue.task_done()
         else:
-            response : DungeonAction = await event_trigger(dungeon, player, interaction,None)
+            response: DungeonAction = await event_trigger(dungeon, player, interaction, None)
             await data_manager.write_character_data(response.player)
             await data_manager.write_dungeon_data(response.dungeon)
             await discordapi.send_webhook_message(interaction.channel, response.result)
             config.dungeon_advance_queue.task_done()
+
 
 async def advance_dungeon(interaction, player, action):
     dungeon: Dungeon = await data_manager.read_dungeon_data(player.progress.dungeon_name)
@@ -222,16 +249,18 @@ async def advance_dungeon(interaction, player, action):
 
         if response.player.progress.position >= 6:  # Check if player has reached the end of the dungeon
             epilogue = await exit_dungeon(interaction, response.player)
-            await discordapi.send_webhook_message(interaction.channel,epilogue)
+            await discordapi.send_webhook_message(interaction.channel, epilogue)
         config.dungeon_advance_queue.task_done()
 
-async def exit_dungeon(interaction,player)->str:
+
+async def exit_dungeon(interaction, player) -> str:
     dungeon: Dungeon = await data_manager.read_dungeon_data(player.progress.dungeon_name)
     history = await discordapi.get_thread_history(interaction.channel)
-    epilogue_prompt = dungeon_prompt.epilogue_prompt(dungeon,history)
+    epilogue_prompt = dungeon_prompt.epilogue_prompt(dungeon, history)
     epilogue_response = await llmapi.send_to_llm(epilogue_prompt)
     epilogue = epilogue_response.results[0].text
     return epilogue
+
 
 async def create_dungeon():
     while True:

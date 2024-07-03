@@ -27,6 +27,8 @@ async def generate_new_player():
         else:
             # Make the character
             # Uses default attribute Generator
+            # TODO: ^Can we fucking not? This is the Player we're talking about!!!
+            # Make a better Character Creator Prompt!
             player_data = await processors.process_attributes(about, player_name, "Person", 1)
             print(player_data.stat)
             player_data = Player(name=player_name, desc=player_data.desc, stat=player_data.stat)

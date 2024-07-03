@@ -6,7 +6,6 @@ import discord
 from dataclasses_json import dataclass_json
 
 
-
 @dataclass_json
 @dataclass
 class Stat:
@@ -32,11 +31,13 @@ class Equipment:
     desc: str = ""
     stat: Stat = field(default_factory=Stat)
 
+
 @dataclass_json
 @dataclass
 class DungeonProgress:
-    dungeon_name:str = ""
-    position:int = 0
+    dungeon_name: str = ""
+    position: int = 0
+
 
 @dataclass_json
 @dataclass
@@ -50,7 +51,7 @@ class Player:
     possession: Equipment = field(default_factory=Equipment)
     power: Equipment = field(default_factory=Equipment)
     progress: DungeonProgress = field(default_factory=DungeonProgress)
-    turn:bool = False
+    turn: bool = False
 
 
 @dataclass_json
@@ -78,10 +79,12 @@ class Encounter:
     description: str
     choices: list[Choice] = field(default_factory=list)
 
+
 @dataclass_json
 @dataclass
 class Event:
-    event : Union[Encounter,Enemy]
+    event: Union[Encounter, Enemy]
+
 
 @dataclass_json
 @dataclass
@@ -89,6 +92,7 @@ class Dungeon:
     name: str = ""
     events: list[Event] = field(default_factory=list)
     thread: int = 0
+
 
 @dataclass_json
 @dataclass
@@ -202,15 +206,18 @@ class DungeonCreationQueueItem:
     interaction: discord.Interaction
     material: str = "Tutorial Book"
 
+
 class ActionType(Enum):
     ATTACK = "Attack"
     DEFEND = "Defend"
     FLEE = "Flee"
 
+
 class DamageType(Enum):
     PHYSICAL = "Physical"
     MENTAL = "Mental"
     THAUMATURGIC = "Thaumaturgic"
+
 
 @dataclass
 class BattleAction:
@@ -218,10 +225,13 @@ class BattleAction:
     type: DamageType
     quip: str
 
+
 @dataclass
 class EncounterAction:
     choice: str
+    material: str
     quip: str
+
 
 @dataclass
 class DungeonAdvanceQueueItem:
@@ -233,11 +243,13 @@ class DungeonAdvanceQueueItem:
 class DungeonAction:
     dungeon: Dungeon = field(default_factory=Dungeon)
     history: str = ""
-    player:Player = field(default_factory=Player)
-    floor:int = 0
+    player: Player = field(default_factory=Player)
+    floor: int = 0
     action: BattleAction | EncounterAction | None = None
-    result:str = ""
+    result: str = ""
+
+
 @dataclass
 class BattleResult:
-    attacker:Stat
-    target:Stat
+    attacker: Stat
+    target: Stat
