@@ -76,8 +76,8 @@ def regex_llm_choices(text, desc) -> List[Choice]:
     return choices
 
 
-async def process_choices(desc: str, player: Player) -> List[Choice]:
-    choices_prompt = await prompts.choices_from_description_prompt(desc, player)
+async def process_choices(desc: str) -> List[Choice]:
+    choices_prompt = await prompts.choices_from_description_prompt(desc)
     #print(atrb_prompt)
     generated_choices = await llmapi.send_to_llm(choices_prompt)
 
@@ -94,7 +94,6 @@ def regex_llm_materials(text: str) -> list[str]:
 
     # Return the list of matched items
     return matches
-
 
 async def process_materials(desc: str) -> list[str]:
     material_prompt = await prompts.materials_from_description_prompt(desc)

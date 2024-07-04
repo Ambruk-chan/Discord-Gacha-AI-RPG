@@ -25,6 +25,13 @@ class Stat:
     attributes: list = field(default_factory=list)
 
 
+@dataclass
+class Entity:
+    name: str = ""
+    desc: str = ""
+    stat: Stat | None = None
+
+
 @dataclass_json
 @dataclass
 class Equipment:
@@ -77,7 +84,8 @@ class Enemy:
 
 @dataclass_json
 @dataclass
-class Encounter:
+class Encounter: # Well fuck, guess I do need to name my encounter...
+    name: str # WELL FUCK! I HAVE TO RECREATE THE DUNGEON CREATION SYSTEM!!!!
     description: str
     choices: list[Choice] = field(default_factory=list)
 
@@ -208,6 +216,13 @@ class DungeonCreationQueueItem:
     interaction: discord.Interaction
     material: str = "Tutorial Book"
 
+@dataclass
+class DungeonEnterQueueItem:
+    interaction: discord.Interaction
+    player: Summon|Player
+    dungeon_name: str = ""
+
+
 
 class ActionType(Enum):
     ATTACK = "Attack"
@@ -237,29 +252,13 @@ class EncounterAction:
 
 @dataclass
 class PassAction:
-    quip: str = "Nothing~"
+    quip: str = ""
 
 
 @dataclass
 class DungeonActionQueueItem:
     interaction: discord.Interaction
-    action: BattleAction | EncounterAction | PassAction
-
-
-@dataclass
-class DungeonAction:
-    dungeon: Dungeon = field(default_factory=Dungeon)
-    history: str = ""
-    player: Player = field(default_factory=Player)
-    floor: int = 0
-    action: BattleAction | EncounterAction | None = None
-    result: str = ""
-
-
-@dataclass
-class BattleResult:
-    attacker: Stat
-    target: Stat
+    action: BattleAction | EncounterAction | PassAction | None
 
 
 @dataclass
@@ -271,11 +270,33 @@ class DungeonRecord:
 
 @dataclass
 class DungeonHistory:
+    thread_id: int | None = None
+    user: str | None = None
+    player: Entity | None = None
+    enemy: Entity | None = None
     records: list[DungeonRecord] | None = None
+    dungeon: Dungeon | None = None
+    floor: int | None = None
+    materials: list | None = None
 
 
 @dataclass
-class Entity:
-    name: str
-    desc: str
-    stat: Stat
+class DungeonAction:
+    history: DungeonHistory | None = None
+    action: BattleAction | EncounterAction | None = None
+    floor: int | None = None
+    result: str | None = None
+
+
+@dataclass
+class BattleResult:
+    attacker: Stat
+    target: Stat
+    meta_info: str
+
+
+@dataclass
+class ActionResult:
+    stat_change:Stat | None = None
+    material_change: list | None = None
+    meta_info:str|None = None
