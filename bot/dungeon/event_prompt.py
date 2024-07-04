@@ -1,6 +1,7 @@
 # TODO: PWOMPT ENGWEENIWING
 
 def create_battle_quip_prompt(attacker, target, history, init_meta_battle):
+    
     return None
 
 
