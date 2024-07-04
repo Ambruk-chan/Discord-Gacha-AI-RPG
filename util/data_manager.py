@@ -185,3 +185,8 @@ def format_dungeon_for_discord(json_file):
         return output.strip()
 
     return output.strip()
+
+
+def read_dungeon_history(dungeon):
+
+    return None

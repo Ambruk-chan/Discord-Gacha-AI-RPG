@@ -22,7 +22,7 @@ def dungeon_creation_prompt(catalyst, player_data:Player):
 
 def enemy_intro_prompt(action:DungeonAction):
     request = GenerationRequest()
-    grammar = create_dungeon_grammar()
+    grammar = "TODO HERE" #TODO
     enemy = action.dungeon.events[action.floor].event
     prompt = f"Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nBased on the creature description written by User, Dungeon Narrator will write down an introduction/dramatic appearance of the creature.\n### Instruction:\nUser: Name: [Spirit of the Prairie]\nDescription: [A colossal, four-legged creature with an antlered head and a mane of lightning. Its body shimmers with energy, and it wields the power of the storm. The Spirit of the Prairie has roamed these lands for centuries, protecting the land and its people from those who would seek to tame it.]\n\n### Response:\nDungeon Narrator: [As you crest the hill, the air crackles with electricity, and the wind whips into a frenzy. Suddenly, the prairie before you comes alive. A massive form materializes from shimmering air, its four legs sending tremors through the earth with each step. An enormous antlered head rises, crowned by a mane that dances with blue-white lightning.\n\nThe Spirit of the Prairie fixes you with ancient eyes that flash like thunderbolts. Its translucent body pulses with barely contained energy, and storm clouds gather overhead at its silent command. You feel the weight of centuries in its gaze, a primal force of nature incarnate. The air hums with power as the spirit paws the ground, ready to defend its domain against any who would threaten the sanctity of these wild lands.]\n\n### Instruction:\nUser: Name: [Queen Jungle Oracle]\nDescription:[A beautiful woman with skin the color of mahogany, she wears leaves as a crown and carries a staff of ancient wood. Her eyes glow with wisdom and power, and she summons vines and animals to defend her domain. The Oracle's voice echoes through the jungle as she challenges you to understand the balance of nature.]\n\n### Response:\nDungeon Narrator: [The dense foliage parts as if by an unseen hand, revealing a clearing bathed in ethereal green light. At its center stands a regal figure, her mahogany skin gleaming like polished wood. Atop her head sits a crown of vibrant leaves, swaying gently despite the stillness of the air. In her grasp, an ancient staff pulses with primal energy, its surface etched with symbols of forgotten lore.\n\nThe Queen Jungle Oracle's eyes lock onto you, glowing with otherworldly knowledge. As she speaks, her voice reverberates through the trees, carried by unseen spirits. Vines slither from the undergrowth at her command, coiling protectively around her feet. The jungle itself seems to breathe with her, leaves rustling and animals emerging from hiding. With a gesture, she beckons you forward, challenging you to prove your worth and your understanding of nature's delicate balance.]\n\n### Instruction:\nUser: Name: [{enemy.name}]\nDescription:[{enemy.description}]\n\n### Response(descriptive, creative):\nDungeon Narrator: "
     request.prompt = prompt
@@ -35,7 +35,8 @@ def enemy_intro_prompt(action:DungeonAction):
 
 # TODO: PWOMPT ENGWEENIWING
 
-def enemy_action_prompt(action,battle_result):
+def enemy_action_prompt(action:BattleAction,battle_result:BattleResult):
+
     return None
 
 

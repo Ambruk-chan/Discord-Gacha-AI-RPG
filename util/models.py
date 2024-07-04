@@ -9,8 +9,6 @@ from dataclasses_json import dataclass_json
 @dataclass_json
 @dataclass
 class Stat:
-
-
     hp: int = 0
     max_hp = 0
     phys_atk: int = 0
@@ -40,6 +38,7 @@ class Equipment:
 class DungeonProgress:
     dungeon_name: str = ""
     position: int = 0
+    situation: str | None = None
 
 
 @dataclass_json
@@ -231,15 +230,20 @@ class BattleAction:
 
 @dataclass
 class EncounterAction:
-    choice: str
-    material: str
-    quip: str
+    choice: str = ""
+    material: list = field(default_factory=list)
+    quip: str = ""
 
 
 @dataclass
-class DungeonAdvanceQueueItem:
+class PassAction:
+    quip: str = "Nothing~"
+
+
+@dataclass
+class DungeonActionQueueItem:
     interaction: discord.Interaction
-    action: BattleAction | EncounterAction | str
+    action: BattleAction | EncounterAction | PassAction
 
 
 @dataclass
@@ -256,3 +260,22 @@ class DungeonAction:
 class BattleResult:
     attacker: Stat
     target: Stat
+
+
+@dataclass
+class DungeonRecord:
+    type: str = ""
+    meta: str = ""
+    story: str = ""
+
+
+@dataclass
+class DungeonHistory:
+    records: list[DungeonRecord] | None = None
+
+
+@dataclass
+class Entity:
+    name: str
+    desc: str
+    stat: Stat

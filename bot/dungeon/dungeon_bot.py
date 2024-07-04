@@ -23,8 +23,8 @@ def setup_dungeon_commands(tree: app_commands.CommandTree):
 
     @group.command(name="enter", description="Enter a Dungeon!")
     async def dungeon_enter(interaction: discord.Interaction):
-        config.dungeon_advance_queue.put_nowait(
-            DungeonAdvanceQueueItem(interaction,"Start")
+        config.dungeon_action_queue.put_nowait(
+            DungeonActionQueueItem(interaction, "Start")
         )
         await interaction.response.send_message("Entering Dungeon~", ephemeral=True)
 
@@ -35,9 +35,13 @@ def setup_dungeon_commands(tree: app_commands.CommandTree):
         await interaction.response.send_message("Retrieved~", ephemeral=True)
 
     @group.command(name="choice", description="Make a choice during encounter!")
-    async def dungeon_choice(interaction: discord.Interaction):
-        result = pick_choices(interaction)
-        await interaction.response.send_message(result, ephemeral=True)
+    async def dungeon_choice(interaction: discord.Interaction, choice:str, quip:str):
+        config.dungeon_action_queue.put_nowait(
+            DungeonActionQueueItem(interaction, EncounterAction(
+                choice=choice, quip=quip
+            ))
+        )
+        await interaction.response.send_message("Choices Accepted, Please Wait~", ephemeral=True)
 
     @group.command(name="abandon", description="Abandon The Dungeon (WILL DESTROY THE DUNGEON)")
     async def dungeon_abandon(interaction: discord.Interaction):
